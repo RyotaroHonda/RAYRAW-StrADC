@@ -61,7 +61,7 @@ set_multicycle_path -setup -from [get_clocks clk_tdc3] -to [get_clocks clk_tdc0]
 create_generated_clock -name clk_gmii1 [get_pins u_GtClockDist_Inst/core_clocking_i/mmcm_adv_inst/CLKOUT0]
 create_generated_clock -name clk_gmii2 [get_pins u_GtClockDist_Inst/core_clocking_i/mmcm_adv_inst/CLKOUT1]
 
-set_clock_groups -name async_sys_gmii -asynchronous -group clk_sys -group {clk_gmii1 clk_gmii2} -group clk_indep -group clk_spi -group {clk_fast clk_slow clk_tdc0 clk_tdc1 ckl_tdc2 clk_tdc3}
+set_clock_groups -name async_sys_gmii -asynchronous -group clk_sys -group {clk_gmii1 clk_gmii2} -group clk_indep -group clk_spi -group {clk_fast clk_slow clk_tdc0 clk_tdc1 clk_tdc2 clk_tdc3}
 
 set_false_path -through [get_ports {LED[1]}]
 set_false_path -through [get_ports {LED[2]}]

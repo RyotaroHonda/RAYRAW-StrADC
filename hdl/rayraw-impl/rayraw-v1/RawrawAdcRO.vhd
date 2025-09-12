@@ -144,7 +144,7 @@ begin
         kIoStandard        => "LVDS",
         kIoDelayGroup      => GetIdelayGroup(i),
         kFreqRefClk        => 200.0,
-        enDEBUG            => TRUE
+        enDEBUG            => FALSE
       )
       port map
       (

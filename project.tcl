@@ -294,6 +294,10 @@ set files [list \
  [file normalize "${origin_dir}/ip/incomingFifo/incomingFifo.xci"] \
  [file normalize "${origin_dir}/ip/finecount_bram/finecount_bram.xci"] \
  [file normalize "${origin_dir}/ip/scr_fifo/scr_fifo.xci"] \
+ [file normalize "${origin_dir}/ip/stradc_cdc_fifo/stradc_cdc_fifo.xci"] \
+ [file normalize "${origin_dir}/ip/adc_delay_bram/adc_delay_bram.xci"] \
+ [file normalize "${origin_dir}/ip/AsicSpiFifo/AsicSpiFifo.xci"] \
+ [file normalize "${origin_dir}/ip/clk_wiz_adc/clk_wiz_adc.xci"] \
  [file normalize "${origin_dir}/hdl/common/sitcp/MOD_WRAP_SiTCP_XC7K.V"] \
  [file normalize "${origin_dir}/hdl/bbt-sitcp-core/SiTCP_XC7K_32K_BBT_V110.V"] \
  [file normalize "${origin_dir}/hdl/bbt-sitcp-core/TIMER.v"] \
@@ -318,8 +322,7 @@ set files [list \
  [file normalize "${origin_dir}/hdl/mikumari/cbt/CdcmRx.vhd"] \
  [file normalize "${origin_dir}/hdl/mikumari/cbt/CbtRx.vhd"] \
  [file normalize "${origin_dir}/hdl/mikumari/cbt/CbtLane.vhd"] \
- [file normalize "${origin_dir}/hdl/common/main/DCR_NetAssign.vhd"] \
- [file normalize "${origin_dir}/hdl/common/main/DelayGen.vhd"] \
+  [file normalize "${origin_dir}/hdl/common/main/DelayGen.vhd"] \
  [file normalize "${origin_dir}/hdl/common/main/SigStretcher.vhd"] \
  [file normalize "${origin_dir}/hdl/strtdc/defDataBusAbst.vhd"] \
  [file normalize "${origin_dir}/hdl/laccp/laccp/defLaccp.vhd"] \
@@ -376,8 +379,7 @@ set files [list \
  [file normalize "${origin_dir}/hdl/common/sitcp/TCP_sender.vhd"] \
  [file normalize "${origin_dir}/hdl/strtdc/lrtdc-impl/odpblock/lrtdc/TDCUnit.vhd"] \
  [file normalize "${origin_dir}/hdl/strtdc/odpblock/TOTFilter.vhd"] \
- [file normalize "${origin_dir}/hdl/common/main/defDCR.vhd"] \
- [file normalize "${origin_dir}/hdl/strtdc/odpblock/defTDCDelayBuffer.vhd"] \
+  [file normalize "${origin_dir}/hdl/strtdc/odpblock/defTDCDelayBuffer.vhd"] \
  [file normalize "${origin_dir}/hdl/common/gig_ethernet_pcs_pma/gig_ethernet_pcs_pma_clocking.vhd"] \
  [file normalize "${origin_dir}/hdl/common/gig_ethernet_pcs_pma/gig_ethernet_pcs_pma_gt_common.vhd"] \
  [file normalize "${origin_dir}/hdl/common/gig_ethernet_pcs_pma/gig_ethernet_pcs_pma_reset_sync_ex.vhd"] \
@@ -400,9 +402,31 @@ set files [list \
  [file normalize "${origin_dir}/hdl/strtdc/odpblock/TDCDelayBuffer.vhd"] \
  [file normalize "${origin_dir}/hdl/strtdc/lrtdc-impl/odpblock/ODPBlock.vhd"] \
  [file normalize "${origin_dir}/hdl/strtdc/vitalblock/VitalBlock.vhd"] \
- [file normalize "${origin_dir}/hdl/strtdc/lrtdc-impl/defStrLRTDC.vhd"] \
- [file normalize "${origin_dir}/hdl/strtdc/lrtdc-impl/strLrTdc.vhd"] \
- [file normalize "${origin_dir}/hdl/toplevel.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/ADCDelayBuffer.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/defADCDelayBuffer.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/defStrDaqRayraw.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/dlmInserterAdc.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/ODPBlockADC.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/SimpleBLSuppressor.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/strDaqRayraw.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/defADC.vhd"] \
+ [file normalize "${origin_dir}/hdl/stradc/rayraw-impl/odpblock/SubFrameFormatter.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/AdcPacker.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/defRayrawStrAdcROV1.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/defYaenamiAdc.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/defYAENAMIController.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/IserdesImpl.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/PackerArray.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/RayrawStrAdcRO.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/YaenamiAdc.vhd"] \
+ [file normalize "${origin_dir}/hdl/rayraw-impl/rayraw-v1/YAENAMIController.vhd"] \
+ [file normalize "${origin_dir}/hdl/cirasame-impl/max1932/defMAX1932Controller.vhd"] \
+ [file normalize "${origin_dir}/hdl/cirasame-impl/max1932/MAX1932Controller.vhd"] \
+ [file normalize "${origin_dir}/hdl/utility/spi-tx/defManchesterEncoder.vhd"] \
+ [file normalize "${origin_dir}/hdl/utility/spi-tx/SpiTx.vhd"] \
+ [file normalize "${origin_dir}/hdl/utility/spi-tx/SpiTxIf.vhd"] \
+ [file normalize "${origin_dir}/hdl/common/main/GeneralSpiMaster.vhd"] \
+  [file normalize "${origin_dir}/hdl/toplevel.vhd"] \
  ]
 add_files -norecurse -fileset $obj $files
 
@@ -563,6 +587,46 @@ if { ![get_property "is_locked" $file_obj] } {
   set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
 }
 
+set file "$origin_dir/ip/stradc_cdc_fifo/stradc_cdc_fifo.xci"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+set_property -name "registered_with_manager" -value "1" -objects $file_obj
+if { ![get_property "is_locked" $file_obj] } {
+  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
+}
+
+set file "$origin_dir/ip/adc_delay_bram/adc_delay_bram.xci"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+set_property -name "registered_with_manager" -value "1" -objects $file_obj
+if { ![get_property "is_locked" $file_obj] } {
+  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
+}
+
+set file "$origin_dir/ip/AsicSpiFifo/AsicSpiFifo.xci"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+set_property -name "registered_with_manager" -value "1" -objects $file_obj
+if { ![get_property "is_locked" $file_obj] } {
+  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
+}
+
+set file "$origin_dir/ip/clk_wiz_adc/clk_wiz_adc.xci"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+set_property -name "registered_with_manager" -value "1" -objects $file_obj
+if { ![get_property "is_locked" $file_obj] } {
+  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
+}
+
 set file "$origin_dir/hdl/common/sitcp/MOD_WRAP_SiTCP_XC7K.V"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -698,12 +762,6 @@ set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "mylib" -objects $file_obj
 
 set file "$origin_dir/hdl/mikumari/cbt/CbtLane.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "mylib" -objects $file_obj
-
-set file "$origin_dir/hdl/common/main/DCR_NetAssign.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
@@ -1051,12 +1109,6 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
 set_property -name "library" -value "mylib" -objects $file_obj
 
-set file "$origin_dir/hdl/common/main/defDCR.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "mylib" -objects $file_obj
-
 set file "$origin_dir/hdl/strtdc/odpblock/defTDCDelayBuffer.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -1195,16 +1247,148 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
 set_property -name "library" -value "mylib" -objects $file_obj
 
-set file "$origin_dir/hdl/strtdc/lrtdc-impl/defStrLRTDC.vhd"
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/ADCDelayBuffer.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
 set_property -name "library" -value "mylib" -objects $file_obj
 
-set file "$origin_dir/hdl/strtdc/lrtdc-impl/strLrTdc.vhd"
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/defADCDelayBuffer.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/defStrDaqRayraw.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/dlmInserterAdc.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/ODPBlockADC.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/SimpleBLSuppressor.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/strDaqRayraw.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/defADC.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/stradc/rayraw-impl/odpblock/SubFrameFormatter.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/AdcPacker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/defRayrawStrAdcROV1.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/defYaenamiAdc.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/defYAENAMIController.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/IserdesImpl.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/PackerArray.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/RayrawStrAdcRO.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/YaenamiAdc.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/rayraw-impl/rayraw-v1/YAENAMIController.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/cirasame-impl/max1932/defMAX1932Controller.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/cirasame-impl/max1932/MAX1932Controller.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/utility/spi-tx/defManchesterEncoder.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/utility/spi-tx/SpiTx.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/utility/spi-tx/SpiTxIf.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL 2008" -objects $file_obj
+set_property -name "library" -value "mylib" -objects $file_obj
+
+set file "$origin_dir/hdl/common/main/GeneralSpiMaster.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "mylib" -objects $file_obj
 
 set file "$origin_dir/hdl/toplevel.vhd"

@@ -19,14 +19,14 @@ use mylib.defSiTCP.all;
 use mylib.defRBCP.all;
 
 use mylib.defYaenamiAdc.all;
-use mylib.defRayrawAdcROV1.all;
+use mylib.defRayrawStrAdcROV1.all;
 use mylib.defYAENAMIController.all; -- Slow Control
 use mylib.defMAX.all; -- APD_BIAS
 
 use mylib.defDataBusAbst.all;
 use mylib.defDelimiter.all;
 use mylib.defTDC.all;
-use mylib.defStrLRTDC.all;
+--use mylib.defStrLRTDC.all;
 use mylib.defIOManager.all;
 
 entity toplevel is
@@ -85,11 +85,13 @@ ASIC_DISCRI         : in std_logic_vector(31 downto 0);
 -- TRIGGER_OUT ----------------------------------------------------------
 
 -- APD_BIAS -------------------------------------------------------------
+CP_CS_B             : out std_logic;
+CP_SCLK             : out std_logic;
+CP_DIN              : out std_logic;
+CP_CL_B             : in std_logic;
 
 -- ASIC_ADC -------------------------------------------------------------
 ADC_DATA_P          : in std_logic_vector(31 downto 0);
-
-
 ADC_DATA_N          : in std_logic_vector(31 downto 0);
 
 
@@ -270,14 +272,17 @@ architecture Behavioral of toplevel is
 
   -- MAX1932Controller --------------------------------------------------------
 
-  -- YAENAMI ADC --------------------------------------------------------------
-  signal is_ready_asic  : std_logic_vector(kNumAsic-1 downto 0);
+  -- Streaming ADC ------------------------------------------------------------
+  COMPONENT vio_0
+  PORT (
+    clk : IN STD_LOGIC;
+    probe_out0 : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+    probe_out1 : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+  );
+  END COMPONENT;
 
-  signal valid_adc_data : std_logic_vector(kNumAsic-1 downto 0);
-  signal adc_data       : AdcDataBlockArray;
-  signal adc_frame      : AdcFrameBlockArray;
-
-  signal asic_ref_clk   : std_logic;
+  signal reset_vio         : std_logic_vector(0 downto 0);
+  signal reset_adc_cycle   : std_logic_vector(0 downto 0);
 
 
   -- Streaming TDC ------------------------------------------------------------
@@ -549,6 +554,21 @@ architecture Behavioral of toplevel is
   signal mmcm_cdcm_reset      : std_logic;
   --signal pll_is_locked        : std_logic;
 
+  component clk_wiz_adc
+    port
+     (-- Clock in ports
+      -- Clock out ports
+      clk_adc          : out    std_logic;
+      -- Status and control signals
+      reset             : in     std_logic;
+      locked            : out    std_logic;
+      clk_in1           : in     std_logic
+     );
+    end component;
+
+  signal clk_adcref     : std_logic;
+  signal clk_adc_locked : std_logic;
+
 
  begin
   -- ===================================================================================
@@ -562,7 +582,7 @@ architecture Behavioral of toplevel is
 
   --clk_miku_locked <= CDCE_LOCK;
   clk_miku_locked <= mmcm_cdcm_locked;
-  clk_locked      <= clk_sys_locked and clk_miku_locked;
+  clk_locked      <= clk_sys_locked and clk_miku_locked and clk_adc_locked;
 
   --c6c_reset       <= (not clk_sys_locked) or (not delayed_usr_rstb);
   c6c_reset       <= '1';
@@ -625,7 +645,7 @@ architecture Behavioral of toplevel is
         kDiffTerm        => TRUE,
         kIoStandardRx    => GetMikuIoStd(kPcbVersion),
         kRxPolarity      => TRUE,
-        kIoDelayGroup    => "idelay_1",
+        kIoDelayGroup    => "idelay_miku",
         kFixIdelayTap    => FALSE,
         kFreqFastClk     => 500.0,
         kFreqRefClk      => 200.0,
@@ -990,51 +1010,43 @@ architecture Behavioral of toplevel is
 
 
   -- ADC ----------------------------------------------------------------------------------
-  process(clk_slow)
+--  process(clk_slow, pwr_on_reset)
+--  begin
+--    if(pwr_on_reset = '1') then
+--      asic_ref_clk  <= '0';
+--    elsif(clk_slow'event and clk_slow = '1') then
+--      asic_ref_clk  <= not asic_ref_clk;
+--    end if;
+--  end process;
+--  ASIC_REFC(0)   <= asic_ref_clk;
+--  ASIC_REFC(1)   <= asic_ref_clk;
+--  ASIC_REFC(2)   <= asic_ref_clk;
+--  ASIC_REFC(3)   <= asic_ref_clk;
+
+  gen_oddr : for i in 0 to kNumAsic-1 generate
   begin
-    if(clk_slow'event and clk_slow = '1') then
-      asic_ref_clk  <= not asic_ref_clk;
-    end if;
-  end process;
-  ASIC_REFC(0)   <= asic_ref_clk;
-  ASIC_REFC(1)   <= asic_ref_clk;
-  ASIC_REFC(2)   <= asic_ref_clk;
-  ASIC_REFC(3)   <= asic_ref_clk;
 
-  u_ADC : entity mylib.RawrayAdcRO
-  generic map
-  (
-    enDEBUG       => true
-  )
-  port map
-  (
-    -- SYSTEM port --
-    rst           => user_reset,
-    clkSys        => clk_slow,
-    clkIdelayRef  => clk_gbe,
-    tapValueIn    => "0000",
-    tapValueFrameIn    => "0000000000",
-    enExtTapIn    => '0',
-    enBitslip     => '1',
-    frameRefPatt  => "1100000000",
+   u_ODDR_inst : ODDR
+   generic map(
+      DDR_CLK_EDGE => "OPPOSITE_EDGE", -- "OPPOSITE_EDGE" or "SAME_EDGE"
+      INIT => '0',   -- Initial value for Q port ('1' or '0')
+      SRTYPE => "SYNC") -- Reset Type ("ASYNC" or "SYNC")
+   port map (
+      Q => ASIC_REFC(i),   -- 1-bit DDR output
+      C => clk_adcref,    -- 1-bit clock input
+      CE => '1',  -- 1-bit clock enable input
+      D1 => '1',  -- 1-bit data input (positive edge)
+      D2 => '0',  -- 1-bit data input (negative edge)
+      R => '0',    -- 1-bit reset input
+      S => '0'     -- 1-bit set input
+   );
+   end generate;
 
-    -- Status --
-    isReady       => is_ready_asic,
-    bitslipErr    => bitslip_err_asic,
-    clkAdc        => open,
-
-    -- Data Out --
-    validOut      => valid_adc_data,
-    adcDataOut    => adc_data,
-    adcFrameOut   => adc_frame,
-
-    -- ADC In --
-    adcDClkP      => ADC_DCLK_P,
-    adcDClkN      => ADC_DCLK_N,
-    adcDataP      => ADC_DATA_P,
-    adcDataN      => ADC_DATA_N,
-    adcFrameP     => ADC_DFRAME_P,
-    adcFrameN     => ADC_DFRAME_N
+  u_VIO : vio_0
+  PORT MAP (
+    clk => clk_slow,
+    probe_out0 => reset_vio,
+    probe_out1 => reset_adc_cycle
   );
 
 
@@ -1043,17 +1055,20 @@ architecture Behavioral of toplevel is
   signal_in_merge   <= ASIC_DISCRI;
   strtdc_trigger_in <= laccp_pulse_out(kDownPulseTrigger) or local_trigger_in;
 
-  u_SLT_Inst: entity mylib.StrLrTdc
+  u_SLT_Inst: entity mylib.StrDaqRayraw
     generic map(
-      kTdcType        => "LRTDC",
-      kNumInput       => kNumInput,
-      kDivisionRatio  => 4,
-      enDEBUG         => false
+      kNumInput          => kNumInput,
+      kDivisionRatioTdc  => 1,
+      kDivisionRatioAdc  => 4,
+      enDEBUG            => false
     )
     port map(
       rst           => user_reset,
+      rstAdc        => reset_vio(0),
+      rstAdcCycle   => reset_adc_cycle(0),
       clk           => clk_slow,
       tdcClk        => clk_tdc,
+      indepClk      => clk_gbe,
 
       radiationURE  => uncorrectable_flag,
       daqOn         => daq_is_runnig,
@@ -1078,9 +1093,17 @@ architecture Behavioral of toplevel is
       sigIn             => signal_in_merge,
       triggerIn         => strtdc_trigger_in,
 
-      dataRdEn            => vital_rden,
-      dataOut             => vital_dout,
-      dataRdValid         => vital_valid,
+      dataRdEn          => vital_rden,
+      dataOut           => vital_dout,
+      dataRdValid       => vital_valid,
+
+      -- ADC interface ----------------------------------------------
+      adcDClkP          => ADC_DCLK_P,
+      adcDClkN          => ADC_DCLK_N,
+      adcDataP          => ADC_DATA_P,
+      adcDataN          => ADC_DATA_N,
+      adcFrameP         => ADC_DFRAME_P,
+      adcFrameN         => ADC_DFRAME_N,
 
       -- LinkBuffer interface ---------------------------------------
       pfullLinkBufIn      => pfull_link_buf,
@@ -1563,6 +1586,17 @@ architecture Behavioral of toplevel is
       clk_in_sel      => dip_sw(kStandAlone.Index)
       );
 
+  --
+  u_ClkAdc_Inst : clk_wiz_adc
+    port map (
+    -- Clock out ports
+     clk_adc    => clk_adcref,
+    -- Status and control signals
+     reset      => '0',
+     locked     => clk_adc_locked,
+     -- Clock in ports
+     clk_in1    => clk_slow
+    );
 
 --  u_IBUFDS_SLOW_inst : IBUFDS
 --    generic map (

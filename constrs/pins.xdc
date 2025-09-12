@@ -105,6 +105,10 @@ set_property PACKAGE_PIN M24 [get_ports ASIC_DISCRI[31]]
 # TRIGGER_OUT ----------------------------------------------------------
 
 # APD_BIAS -------------------------------------------------------------
+set_property PACKAGE_PIN K22 [get_ports CP_CS_B]
+set_property PACKAGE_PIN K23 [get_ports CP_SCLK]
+set_property PACKAGE_PIN L22 [get_ports CP_DIN]
+set_property PACKAGE_PIN L23 [get_ports CP_CL_B]
 
 # ASIC_ADC -------------------------------------------------------------
 set_property PACKAGE_PIN U2 [get_ports ADC_DATA_P[0]]
@@ -245,6 +249,10 @@ set_property IOSTANDARD LVCMOS12 [get_ports ASIC_DISCRI[*]]
 # TRIGGER_OUT ----------------------------------------------------------
 
 # APD_BIAS -------------------------------------------------------------
+set_property IOSTANDARD LVCMOS33 [get_ports CP_CS_B]
+set_property IOSTANDARD LVCMOS33 [get_ports CP_SCLK]
+set_property IOSTANDARD LVCMOS33 [get_ports CP_DIN]
+set_property IOSTANDARD LVCMOS33 [get_ports CP_CL_B]
 
 # ASIC_ADC -------------------------------------------------------------
 set_property IOSTANDARD LVDS [get_ports ADC_DATA_P[*]]

@@ -41,11 +41,11 @@ package body defBusAddressMap is
   function GetID(mid_ext_bus: std_logic_vector(kWidthModuleID-1 downto 0)) return ModuleID is
   begin
     case mid_ext_bus is
-      when "0000"   => return kMUTIL.ID;
+      when "0000"   => return kYSC.ID;
       when "0001"   => return kTDC.ID;
       when "0010"   => return kIOM.ID;
-      when "0011"   => return kYSC.ID;
       when "0100"   => return kAPD.ID;
+      when "0101"   => return kMUTIL.ID;
       when "1000"   => return kSCR.ID;
       --when "1011"   => return kC6C.ID;
       when "1100"   => return kSDS.ID;
