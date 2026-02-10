@@ -81,6 +81,7 @@
 # Project directory
 #########
 build/
+build_v2/
 !bit/*.bit
 !mcs/*.mcs
 #########

@@ -1167,7 +1167,7 @@ architecture Behavioral of toplevel is
       clk	                => clk_slow,
 
       -- Analog monitor --
-      addrAmon            => AMON_ADDR,
+      addrAmon            => AMUX_ADDR,
 
       -- Ext Input
       extInput            => sync_nim_in,

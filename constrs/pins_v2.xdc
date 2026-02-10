@@ -237,8 +237,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports EEP_SK[*]]
 set_property IOSTANDARD LVCMOS33 [get_ports EEP_DI[*]]
 set_property IOSTANDARD LVCMOS33 [get_ports EEP_DO[*]]
 
-set_property IOSTANDARD LVCMOS33 [get_ports EEP2_SCL]
-set_property IOSTANDARD LVCMOS33 [get_ports EEP2_SDA]
+#set_property IOSTANDARD LVCMOS33 [get_ports EEP2_SCL]
+#set_property IOSTANDARD LVCMOS33 [get_ports EEP2_SDA]
 
 # NIM-IO ---------------------------------------------------------------
 set_property IOSTANDARD LVCMOS33 [get_ports NIM_IN[*]]
