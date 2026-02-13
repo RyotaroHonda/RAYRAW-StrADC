@@ -3,7 +3,7 @@
   "ip_inst": {
     "xci_name": "sem_controller",
     "component_reference": "xilinx.com:ip:sem:4.1",
-    "ip_revision": "13",
+    "ip_revision": "17",
     "gen_directory": ".",
     "parameters": {
       "component_parameters": {
@@ -38,28 +38,26 @@
         "b_gen_user_app": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ]
       },
       "project_parameters": {
-        "ARCHITECTURE": [ { "value": "kintex7" } ],
-        "BASE_BOARD_PART": [ { "value": "" } ],
-        "BOARD_CONNECTIONS": [ { "value": "" } ],
-        "DEVICE": [ { "value": "xc7k160t" } ],
-        "PACKAGE": [ { "value": "ffg676" } ],
-        "PREFHDL": [ { "value": "VHDL" } ],
-        "SILICON_REVISION": [ { "value": "" } ],
-        "SIMULATOR_LANGUAGE": [ { "value": "MIXED" } ],
-        "SPEEDGRADE": [ { "value": "-2" } ],
-        "STATIC_POWER": [ { "value": "" } ],
-        "TEMPERATURE_GRADE": [ { "value": "" } ],
-        "USE_RDI_CUSTOMIZATION": [ { "value": "TRUE" } ],
-        "USE_RDI_GENERATION": [ { "value": "TRUE" } ]
+        "ARCHITECTURE": [ { "value": "kintex7", "resolve_type": "generated", "usage": "all" } ],
+        "BASE_BOARD_PART": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "BOARD_CONNECTIONS": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "DEVICE": [ { "value": "xc7k160t", "resolve_type": "generated", "usage": "all" } ],
+        "PACKAGE": [ { "value": "ffg676", "resolve_type": "generated", "usage": "all" } ],
+        "PREFHDL": [ { "value": "VHDL", "resolve_type": "generated", "usage": "all" } ],
+        "SILICON_REVISION": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "SIMULATOR_LANGUAGE": [ { "value": "MIXED", "resolve_type": "generated", "usage": "all" } ],
+        "SPEEDGRADE": [ { "value": "-2", "resolve_type": "generated", "usage": "all" } ],
+        "STATIC_POWER": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "TEMPERATURE_GRADE": [ { "value": "", "resolve_type": "generated", "usage": "all" } ]
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
-        "IPREVISION": [ { "value": "13" } ],
+        "IPREVISION": [ { "value": "17" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "." } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
-        "SWVERSION": [ { "value": "2023.1.1" } ],
+        "SWVERSION": [ { "value": "2025.2" } ],
         "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }
     },
@@ -98,5 +96,6 @@
         "fecc_synword": [ { "direction": "in", "size_left": "6", "size_right": "0", "driver_value": "0" } ]
       }
     }
-  }
+  },
+  "checksum": "c54b311f"
 }

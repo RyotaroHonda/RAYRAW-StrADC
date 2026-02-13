@@ -3,7 +3,7 @@
   "ip_inst": {
     "xci_name": "RbcpCdc_LinkToSys",
     "component_reference": "xilinx.com:ip:fifo_generator:13.2",
-    "ip_revision": "8",
+    "ip_revision": "14",
     "gen_directory": ".",
     "parameters": {
       "component_parameters": {
@@ -16,13 +16,13 @@
         "asymmetric_port_width": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Input_Data_Width": [ { "value": "42", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Input_Depth": [ { "value": "16", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
-        "Output_Data_Width": [ { "value": "42", "value_src": "user", "resolve_type": "user", "enabled": false, "usage": "all" } ],
-        "Output_Depth": [ { "value": "16", "value_src": "user", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "Output_Data_Width": [ { "value": "42", "resolve_type": "user", "enabled": false, "usage": "all" } ],
+        "Output_Depth": [ { "value": "16", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Enable_ECC": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Use_Embedded_Registers": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Reset_Pin": [ { "value": "true", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Enable_Reset_Synchronization": [ { "value": "true", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "Reset_Type": [ { "value": "Asynchronous_Reset", "value_src": "user", "resolve_type": "user", "enabled": false, "usage": "all" } ],
+        "Reset_Type": [ { "value": "Asynchronous_Reset", "resolve_type": "user", "enabled": false, "usage": "all" } ],
         "Full_Flags_Reset_Value": [ { "value": "1", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Use_Dout_Reset": [ { "value": "true", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Dout_Reset_Value": [ { "value": "0", "resolve_type": "user", "usage": "all" } ],
@@ -42,17 +42,17 @@
         "ecc_pipeline_reg": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Use_Extra_Logic": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
         "Data_Count": [ { "value": "false", "resolve_type": "user", "format": "bool", "enabled": false, "usage": "all" } ],
-        "Data_Count_Width": [ { "value": "4", "value_src": "user", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "Data_Count_Width": [ { "value": "4", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Write_Data_Count": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "Write_Data_Count_Width": [ { "value": "4", "value_src": "user", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "Write_Data_Count_Width": [ { "value": "4", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Read_Data_Count": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
-        "Read_Data_Count_Width": [ { "value": "4", "value_src": "user", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "Read_Data_Count_Width": [ { "value": "4", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Disable_Timing_Violations": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Read_Clock_Frequency": [ { "value": "1", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Write_Clock_Frequency": [ { "value": "1", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Programmable_Full_Type": [ { "value": "No_Programmable_Full_Threshold", "resolve_type": "user", "usage": "all" } ],
-        "Full_Threshold_Assert_Value": [ { "value": "13", "value_src": "user", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
-        "Full_Threshold_Negate_Value": [ { "value": "12", "value_src": "user", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "Full_Threshold_Assert_Value": [ { "value": "13", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
+        "Full_Threshold_Negate_Value": [ { "value": "12", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Programmable_Empty_Type": [ { "value": "No_Programmable_Empty_Threshold", "resolve_type": "user", "usage": "all" } ],
         "Empty_Threshold_Assert_Value": [ { "value": "2", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
         "Empty_Threshold_Negate_Value": [ { "value": "3", "resolve_type": "user", "format": "long", "enabled": false, "usage": "all" } ],
@@ -381,28 +381,26 @@
         "C_REG_SLICE_MODE_AXIS": [ { "value": "0", "resolve_type": "generated", "format": "long", "usage": "all" } ]
       },
       "project_parameters": {
-        "ARCHITECTURE": [ { "value": "kintex7" } ],
-        "BASE_BOARD_PART": [ { "value": "" } ],
-        "BOARD_CONNECTIONS": [ { "value": "" } ],
-        "DEVICE": [ { "value": "xc7k160t" } ],
-        "PACKAGE": [ { "value": "ffg676" } ],
-        "PREFHDL": [ { "value": "VHDL" } ],
-        "SILICON_REVISION": [ { "value": "" } ],
-        "SIMULATOR_LANGUAGE": [ { "value": "MIXED" } ],
-        "SPEEDGRADE": [ { "value": "-2" } ],
-        "STATIC_POWER": [ { "value": "" } ],
-        "TEMPERATURE_GRADE": [ { "value": "" } ],
-        "USE_RDI_CUSTOMIZATION": [ { "value": "TRUE" } ],
-        "USE_RDI_GENERATION": [ { "value": "TRUE" } ]
+        "ARCHITECTURE": [ { "value": "kintex7", "resolve_type": "generated", "usage": "all" } ],
+        "BASE_BOARD_PART": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "BOARD_CONNECTIONS": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "DEVICE": [ { "value": "xc7k160t", "resolve_type": "generated", "usage": "all" } ],
+        "PACKAGE": [ { "value": "ffg676", "resolve_type": "generated", "usage": "all" } ],
+        "PREFHDL": [ { "value": "VHDL", "resolve_type": "generated", "usage": "all" } ],
+        "SILICON_REVISION": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "SIMULATOR_LANGUAGE": [ { "value": "MIXED", "resolve_type": "generated", "usage": "all" } ],
+        "SPEEDGRADE": [ { "value": "-2", "resolve_type": "generated", "usage": "all" } ],
+        "STATIC_POWER": [ { "value": "", "resolve_type": "generated", "usage": "all" } ],
+        "TEMPERATURE_GRADE": [ { "value": "", "resolve_type": "generated", "usage": "all" } ]
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
-        "IPREVISION": [ { "value": "8" } ],
+        "IPREVISION": [ { "value": "14" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "." } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
-        "SWVERSION": [ { "value": "2023.1.1" } ],
+        "SWVERSION": [ { "value": "2025.2" } ],
         "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }
     },
@@ -478,5 +476,6 @@
         }
       }
     }
-  }
+  },
+  "checksum": "cd20e593"
 }

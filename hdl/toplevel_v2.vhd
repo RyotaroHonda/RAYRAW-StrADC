@@ -122,6 +122,9 @@ architecture Behavioral of toplevel is
   constant kNumGtx      : integer:= 1;
 
   signal sitcp_reset  : std_logic;
+  signal tmp_sitcp_reset  : std_logic;
+  signal tmp_sitcp_reset_prev : std_logic;
+  signal os_sitcp_reset   : std_logic;
   signal raw_pwr_on_reset : std_logic;
   signal pwr_on_reset : std_logic;
   signal system_reset : std_logic;
@@ -1317,7 +1320,19 @@ architecture Behavioral of toplevel is
 
   -- SiTCP Inst ------------------------------------------------------------------------
   u_SiTCPRst : entity mylib.ResetGen
-    port map(pwr_on_reset or (not pcs_pma_status(kPcsPmaLinkStatus)) or rst_from_miku, clk_sys, sitcp_reset);
+    port map((not pcs_pma_status(kPcsPmaLinkStatus)) or (not delayed_usr_rstb ), clk_sys, tmp_sitcp_reset);
+
+  process(clk_sys)
+  begin
+    if(clk_sys'event and clk_sys='1') then
+      -- Edge detection of tmp_sitcp_reset and make one clock wide pulse
+      os_sitcp_reset <= tmp_sitcp_reset OR (tmp_sitcp_reset_prev AND (not tmp_sitcp_reset));
+      tmp_sitcp_reset_prev <= tmp_sitcp_reset;
+    end if;
+  end process;
+
+  u_KeepSiTCPRst : entity mylib.RstDelayTimer
+    port map(os_sitcp_reset, X"00000FFF", clk_sys, open, sitcp_reset);
 
   gen_SiTCP : for i in 0 to kNumGtx-1 generate
 
@@ -1327,7 +1342,7 @@ architecture Behavioral of toplevel is
       port map
       (
         CLK               => clk_sys, --: System Clock >129MHz
-        RST               => (sitcp_reset), --: System reset
+        RST               => sitcp_reset, --: System reset
         -- Configuration parameters
         FORCE_DEFAULTn    => dip_sw(kSiTCP.Index), --: Load default parameters
         EXT_IP_ADDR       => X"00000000", --: IP address[31:0]
@@ -1427,7 +1442,7 @@ architecture Behavioral of toplevel is
   -- SFP transceiver -------------------------------------------------------------------
   u_MiiRstTimer_Inst : entity mylib.MiiRstTimer
     port map(
-      rst         => emergency_reset(0),
+      rst         => (not pcs_pma_status(kPcsPmaLinkStatus)),
       clk         => clk_sys,
       rstMiiOut   => mii_reset
     );

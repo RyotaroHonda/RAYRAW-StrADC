@@ -80,8 +80,9 @@
 #########
 # Project directory
 #########
-build/
+build_v1/
 build_v2/
+dfx_runtime.txt
 !bit/*.bit
 !mcs/*.mcs
 #########
